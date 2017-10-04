@@ -99,11 +99,17 @@ nmap -sn 192.168.1.1/24
 
 ### NMAP GOOD ARGUMENTS
 -oG = Grepable output
+
 --reason: Display the reason a port is in a particular state
+
 --top--ports (nmap -sT --top-ports 20 IPAddress -oG filename.txt)
+
 -sV = Banner grabbing
+
 -O = OS fingerprinting
+
 -A: Enable OS detection, version detection, script scanning, and traceroute
+
 --open = only display results of open ports
 
 ### Identify smb or netbios services
