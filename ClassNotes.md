@@ -4,7 +4,7 @@
 for ip in $(cat file.txt); do echo $ip; done
 
 ## Create directory structure for each IP in file.txt
-for ip in $(cat file.txt); do mkdir -p "$ip"/{penetration,notes,pillage,remote-enum,root-in-10-steps-or-less}; done
+for ip in $(cat alive.txt); do mkdir -p "$ip"/{findings,notes,pillage,remote-enum,root-in-10-steps-or-less}; done
 
 ## Parse file data
 cut -d'.' -f1 filename.txt |sort -u
@@ -112,7 +112,36 @@ nmap -sn 192.168.1.1/24
 
 --open = only display results of open ports
 
-### Identify smb or netbios services
-nbtscan 192.168.1.0/24
 
+#----- SMB -----#
+
+### Identify smb or netbios services
+nbtscan IPADDRESS/24
+
+PORTS 139,445
+
+### Login to SMB with null session (click enter on password)
+rpcclient -U "" IPADDRESS
+
+### commands to run after connecting
+srvinfo
+enumdomusers
+getdompwinfo
+
+## Tools to use 
+enum4linux -v IPADDRESS
+
+nmap -p 139,445 --script smb-enum-users.nse IPADDRESS -oG smb-enum.txt
+nmap -p 139,445 --script smb-vuln* IPADDRESS -oG smb-enum.txt
+
+#----- SMTP -----#
+
+PORT 25
+
+#Connect via Netcat
+nc -nv 10.10.10.51 25
+VRFY bob
+
+
+for user in $(cat users.txt); do nc -nv IPADDRESS 25; VRFY $user; done
 
