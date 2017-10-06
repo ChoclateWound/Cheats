@@ -191,3 +191,4 @@ wget -O exploitName.c https://www.exploit-db.com/download/12932
 ### LINUX
 id
 cat /etc/shadow
+egrep -ir 'searchterm'
