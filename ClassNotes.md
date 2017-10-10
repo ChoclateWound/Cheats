@@ -369,15 +369,14 @@ tcpdump -nn udp and src 10.10.10.10
 ### Show TCP port 80 Packets going to or from host 10.10.10.10
 tcpdump -nn tcp and port 80 and host 10.10.10.10
 
-# dirb summary of findings
+### dirb summary of findings
 egrep -ir 'found' */dirb*
 
 
 # ----- lair Frameworkd Dockers ----- #
 
 
-#### Import Nmap scans to lair 
+#### Import Nmap scans to lair
+
 ./drone-nmap_darwin_amd64 5T9mjLQEp32g8BXCH /Users/user/Downloads/verions.xml
-=======
-egrep -ir 'searchterm'
->>>>>>> 73b97ee503b1da6a577455be54aaba608cf12162
+
