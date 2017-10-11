@@ -28,15 +28,14 @@ update-rc.d ssh enable
 update-rc.d apache2 enable
 
 
-#----- NetCat -----#
+# ----- Netcat ----- #
 ### Connect using netcat
 nc -nv IPaddress port
 
 ### Netcat listner
 nv -nlvp 4444
 
-## Netcat transfer
-
+## File transfer with Netcat
 ### Receiver
 nc -nlvp 4444 > incoming.txt
 
@@ -46,6 +45,16 @@ nc -nv IPaddress port </path/of/file.txt
 ### SIMPLE TCP & UDP PORT SCAN
 nc -nvv -w 1 -z IPADDRESS START_PORT-END_PORT
 nc -unvv -w 1 -z IPADDRESS START_PORT-END_PORT
+
+### Port Scan 
+nc -v -n -z -w1 IPADDRESS 22-80
+
+### Banner Grab with netcat
+echo "" | nc -v -n -w1 IPADDRESS 22-80
+
+### Monitor port status every second
+while 'nc -vv -z -w3 127.0.0.1 80 > /dev/null'; do echo "Service is ok"; sleep 1; done; echo "Service is dead"; while (true); done echo -e "\x07"; done
+
 
 
 #----- NCat (Supports encrypted tunnel) -----#
@@ -113,11 +122,13 @@ nmap -sn 192.168.1.1/24
 
 --open = only display results of open ports
 
-<<<<<<< HEAD
 nmap -g88 -sS -Pn -n -p 445 --open --reason 10.10.2.0/24 -oA results
 
+
+
+
+
 # ----- SMB (PORT 139, 445) ----- #
->>>>>>> 73b97ee503b1da6a577455be54aaba608cf12162
 ### Identify smb or netbios services
 nbtscan 192.168.1.0/24
 
