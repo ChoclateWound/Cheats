@@ -88,10 +88,6 @@ host -l ns DOMAIN.COM
 ## BUILT TOOLS
 DNSRECON, DNSENUM
 
-
-<<<<<<< HEAD
-# ----- PORT SCANNING -----#
-=======
 # ----- PORT SCANNING ----- #
 >>>>>>> 73b97ee503b1da6a577455be54aaba608cf12162
 SYN SCANNING (half scan) 
@@ -120,8 +116,6 @@ nmap -sn 192.168.1.1/24
 <<<<<<< HEAD
 nmap -g88 -sS -Pn -n -p 445 --open --reason 10.10.2.0/24 -oA results
 
-#----- SMB (PORT 139, 445) -----#
-=======
 # ----- SMB (PORT 139, 445) ----- #
 >>>>>>> 73b97ee503b1da6a577455be54aaba608cf12162
 ### Identify smb or netbios services
@@ -178,7 +172,7 @@ sessions -i 1
 
 cme smb -U USERID -p PASSWORD --local-auth IPADDRESS
 
-# ----- Windows CMD To RUN ----- #
+# ----- Window CMD To RUN ----- #
 whoami
 net user
 cmd /c
@@ -186,6 +180,9 @@ reg
 msbuild
 wscript
 netstat -an /find "LISTEN"
+
+### SMB session 
+net use \\TargetIP PASSWORD /u:USERID
 
 ### Check if user is in local admins group
 net localgroup administrators
