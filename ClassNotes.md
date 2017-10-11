@@ -21,8 +21,6 @@ for f in *\ *; do mv "$f" "${f// /_}"; done
 ### BULK screenshots using ffmpeg
 for file in $(ls | cut -d'.' -f1);do ffmpeg -i $file.mp4 -vframes 1 -s 1280x720 $file.jpg;done
 
-
-
 # ----- Linux Commands ----- #
 ### Process Running
 netstat -antp | grep sshd
@@ -35,18 +33,15 @@ update-rc.d ssh enable
 update-rc.d apache2 enable
 
 
-<<<<<<< HEAD
 # ----- NetCat ----- #
-=======
-# ----- Netcat ----- #
->>>>>>> f3429df335213cd17c497113e19845e246dbc30d
 ### Connect using netcat
 nc -nv IPaddress port
 
 ### Netcat listner
 nv -nlvp 4444
 
-## File transfer with Netcat
+## Netcat transfer
+
 ### Receiver
 nc -nlvp 4444 > incoming.txt
 
@@ -56,16 +51,6 @@ nc -nv IPaddress port </path/of/file.txt
 ### SIMPLE TCP & UDP PORT SCAN
 nc -nvv -w 1 -z IPADDRESS START_PORT-END_PORT
 nc -unvv -w 1 -z IPADDRESS START_PORT-END_PORT
-
-### Port Scan 
-nc -v -n -z -w1 IPADDRESS 22-80
-
-### Banner Grab with netcat
-echo "" | nc -v -n -w1 IPADDRESS 22-80
-
-### Monitor port status every second
-while 'nc -vv -z -w3 127.0.0.1 80 > /dev/null'; do echo "Service is ok"; sleep 1; done; echo "Service is dead"; while (true); done echo -e "\x07"; done
-
 
 
 # ----- NCat (Supports encrypted tunnel) ----- #
@@ -109,7 +94,7 @@ host -l ns DOMAIN.COM
 DNSRECON, DNSENUM
 
 # ----- PORT SCANNING ----- #
->>>>>>> 73b97ee503b1da6a577455be54aaba608cf12162
+
 SYN SCANNING (half scan) 
 
 ### NMAP SCRIPTS
@@ -135,11 +120,8 @@ nmap -sn 192.168.1.1/24
 
 nmap -g88 -sS -Pn -n -p 445 --open --reason 10.10.2.0/24 -oA results
 
-
-
-
-
 # ----- SMB (PORT 139, 445) ----- #
+
 ### Identify smb or netbios services
 nbtscan 192.168.1.0/24
 
@@ -245,7 +227,6 @@ SessionGopher: https://github.com/fireeye/SessionGopher
 ### LINUX
 id
 cat /etc/shadow
-<<<<<<< HEAD
 
 # ----- Password Dump ----- # 
 ### Windows (they dump pass hashes from lsas process)
@@ -396,6 +377,5 @@ egrep -ir 'found' */dirb*
 
 
 #### Import Nmap scans to lair
-
-./drone-nmap_darwin_amd64 5T9mjLQEp32g8BXCH /Users/user/Downloads/verions.xml
+./drone-nmap_darwin_amd64 5T9mjLQEp32g8BXCH /Path/nmap.xml
 
