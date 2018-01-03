@@ -60,10 +60,10 @@ nv -nlvp 4444
 ## Netcat transfer
 
 ### Receiver
-nc -nlvp 4444 > incoming.txt
+nc -l -p 1234 > out.file
 
 ### Sender
-nc -nv IPaddress port </path/of/file.txt
+nc -w 3 [destination] 1234 < out.file
 
 ### SIMPLE TCP & UDP PORT SCAN
 nc -nvv -w 1 -z IPADDRESS START_PORT-END_PORT
