@@ -1,3 +1,15 @@
+# ----- tmux ----- #
+
+### Install ###
+apt-get install tmux
+
+### tmux commands ###
+CTRL+B C (create new window) 
+CTRL+B , (rename window)
+CTRL+B p (switch to previous)
+CTRL+B n (switch to next window)
+CTRL+B w (list of open windows
+
 # ----- Bash ----- #
 
 ### For loop
