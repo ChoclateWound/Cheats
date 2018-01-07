@@ -1,5 +1,5 @@
 # ----- tmux ----- #
-
+#### https://danielmiessler.com/study/tmux/#screen
 ### Install ###
 apt-get install tmux
 
