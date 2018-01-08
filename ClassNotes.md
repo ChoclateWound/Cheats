@@ -1,5 +1,5 @@
 ####################
-#       GENERAL	   #
+### GENERAL	   #
 ####################
 
 # ----- tmux ----- #
@@ -16,7 +16,7 @@ CTRL+B w (list of open windows
 
 
 ####################
-#       RECON	   #
+###      RECON	   #
 ####################
 
 # ----- PORT SCANNING ----- #
@@ -88,12 +88,12 @@ nmap -p 80 --script all IPADDRESS
 openvas-setup
 
 ####################
-#  EXPLOITATION    #
+###  EXPLOITATION  #
 ####################
 
 
 ####################
-#  POST EXPLOIT    #
+###  POST EXPLOIT  #
 ####################
 
 # ----- Search ----- #
