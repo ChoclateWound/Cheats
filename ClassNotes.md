@@ -14,6 +14,8 @@ CTRL+B p (switch to previous)
 CTRL+B n (switch to next window)
 CTRL+B w (list of open windows
 
+#### Find hashes of file in folder ####
+find . -type f -exec md5sum {} \; 
 
 ####################
 ###      RECON	   #
