@@ -13,6 +13,7 @@ CTRL+B , (rename window)
 CTRL+B p (switch to previous)
 CTRL+B n (switch to next window)
 CTRL+B w (list of open windows
+CTRL+B ] (scroll)
 
 #### Find hashes of file in folder ####
 find . -type f -exec md5sum {} \; 
