@@ -9,13 +9,16 @@ apt-get install tmux
 
 ### tmux commands ###
 tmux new -s ctf (create new session)
+
 CTRL+R keyword (recursive search in history)
+
 CTRL+B 0 (switch between windows)
 
 tmux ls
 
 tmux attach -t sessionNAME
-ctrl+B d (deattah)
+
+ctrl+B d (deattach)
 
 
 _________________ vi ~/.tmux.conf ____________
