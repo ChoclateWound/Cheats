@@ -8,6 +8,37 @@
 apt-get install tmux
 
 ### tmux commands ###
+tmux new -s ctf (create new session)
+CTRL+R keyword (recursive search in history)
+CTRL+B 0 (switch between windows)
+
+tmux ls
+
+tmux attach -t sessionNAME
+ctrl+B d (deattah)
+
+
+_________________ vi ~/.tmux.conf ____________
+
+set -g history-limit 10000
+set -g allow-rename off
+
+# search mode VI
+set-window-option -g mode-keys vi
+
+#logging
+run-shell /opt/tmux-logging/logging.tmux
+
+____________________
+
+
+CTRL+B % split
+CTRL+B " split
+CTRL+B z zoomout/zoomin
+CTRL+B leftarrow/rightarrow (move between planes)
+
+ATL+. - goes through history
+
 CTRL+B C (create new window) 
 CTRL+B , (rename window)
 CTRL+B p (switch to previous)
