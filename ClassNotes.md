@@ -124,6 +124,9 @@ nmap -p 80 --script all IPADDRESS
 ## Other Tools
 openvas-setup
 
+# ----- NIKTO ----- #
+nikto -host 10.10.10.27 -port 80 -Display -o results.html -Format htm
+
 ####################
 ###  EXPLOITATION  #
 ####################
