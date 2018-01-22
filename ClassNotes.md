@@ -26,7 +26,7 @@ _________________ vi ~/.tmux.conf ____________
 set -g history-limit 10000
 set -g allow-rename off
 
-# search mode VI
+#search mode VI
 set-window-option -g mode-keys vi
 
 #logging
@@ -59,7 +59,7 @@ find . -type f -exec md5sum {} \;
 # ----- PORT SCANNING ----- #
 
 ### Basic Scan
-nmap -sS -sV -sC -n -oA nmap 10.10.1.1
+nmap -sS -sV -sC -n -oA --open --reason nmap10.10.10.47 10.10.10.47
 
 SYN SCANNING (half scan) 
 
@@ -124,11 +124,20 @@ nmap -p 80 --script all IPADDRESS
 ## Other Tools
 openvas-setup
 
+
+# ----- Dirbuster ----- #
+dirb http://10.10.2.1 /usr/share/dirb/wordlists/vulns/apache.txt -r -o output.txt
+
+gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html -u http://1.2.3.4 - t 25
+
+for ip in $(cat webservers80.txt);do dirb http://$ip /usr/share/dirb/wordlists/vulns/apache.txt -r -o $ip/dirb_$ip.txt; done
+
+
 # ----- NIKTO ----- #
-nikto -host 10.10.10.27 -port 80 -Display -o results.html -Format htm
+nikto -host 10.10.10.47 -port 80 -Display -o nikto10_10_10_47.html -Format htm
 
 # ----- PHP LFI/RFI ----- #
-
+https://hakin9.org/web-application-penetration-testing-local-file-inclusion-lfi-testing/
 ~~~~ 
 <?php phpinfo(); ?>
 
@@ -519,13 +528,6 @@ iptables -n --list
 
 # ----- Hash ----- #
 hash-identifier
-
-# ----- Dirbuster ----- #
-dirb http://10.10.2.1 /usr/share/dirb/wordlists/vulns/apache.txt -r -o output.txt
-
-gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html -u http://1.2.3.4 - t 25
-
-for ip in $(cat webservers80.txt);do dirb http://$ip /usr/share/dirb/wordlists/vulns/apache.txt -r -o $ip/dirb_$ip.txt; done
 
 # ----- TCPDUMP ----- #
 
