@@ -8,8 +8,6 @@
 apt-get install tmux
 
 ### tmux commands ###
-tmux new -s ctf (create new session)
-
 CTRL+R keyword (recursive search in history)
 
 CTRL+B 0 (switch between windows)
@@ -34,20 +32,44 @@ run-shell /opt/tmux-logging/logging.tmux
 
 ____________________
 
+#### Tmux cheatsheet
 
-CTRL+B % split
-CTRL+B " split
-CTRL+B z zoomout/zoomin
-CTRL+B leftarrow/rightarrow (move between planes)
+#### Outside Tmux
+
+-   tmux -u to load tmux with unicode support
+-   tmux new -s <session_name> to create named session
+-   tmux list-sessions or tmux ls to list sessions
+-   tmux attach -t <session_name> or tmux a -t <session_name> to reattach to a session
+-   mux kill-session -t <session_name> to kill sessions
+
+#### Inside Tmux
+
+-   Ctrl+b c to create new window
+-   Ctrl+b ,  to rename window
+-   Ctrl+b p to switch to previous window
+-   Ctrl+b n to switch to next window
+-   Ctrl+b w to list windows
+-   Ctrl+b & to kill a window
+-   Ctrl+b % to split panes vertically
+-   Ctrl+b :  "split-window" or
+    Ctrl+b " to split horizontally
+-   Ctrl+b : "break-pane" or
+    Ctrl+b + to make a pane its own window
+-   Ctrl+b d to detach from a session
+-   Ctrl+b o to switch to next pane
+-   Ctrl+b q  to Show pane numbers (when the numbers show up type the key to go to that pane)
+-   Ctrl+b { to move current pane to right
+-   Ctrl+b } to move current pane to left
+-   Ctrl+b z to zoom a pane
+-   Ctrl+b left/right arrow to leftarrow/rightarrow (move between planes)
+
+##### Note:
+
+-   Ctrl+b : is used to give named commands
+-   Ctrl+b ? to list bindings
 
 ATL+. - goes through history
 
-CTRL+B C (create new window) 
-CTRL+B , (rename window)
-CTRL+B p (switch to previous)
-CTRL+B n (switch to next window)
-CTRL+B w (list of open windows
-CTRL+B ] (scroll)
 
 #### Find hashes of file in folder ####
 find . -type f -exec md5sum {} \; 
