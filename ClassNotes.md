@@ -150,7 +150,9 @@ openvas-setup
 # ----- Dirbuster ----- #
 dirb http://10.10.2.1 /usr/share/dirb/wordlists/vulns/apache.txt -r -o output.txt
 
-gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html -u http://1.2.3.4 - t 25
+gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .php,.html -u http://10.10.10.48 - t 25 -o gobuster.txt
+
+
 
 for ip in $(cat webservers80.txt);do dirb http://$ip /usr/share/dirb/wordlists/vulns/apache.txt -r -o $ip/dirb_$ip.txt; done
 
