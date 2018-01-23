@@ -150,7 +150,7 @@ openvas-setup
 # ----- Dirbuster ----- #
 dirb http://10.10.2.1 /usr/share/dirb/wordlists/vulns/apache.txt -r -o output.txt
 
-gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .php,.html -u http://10.10.10.48 - t 25 -o gobuster.txt
+gobuster -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .php,.html -u http://10.10.10.48 - t 25 -o gobuster_10.10.10.48
 
 
 
