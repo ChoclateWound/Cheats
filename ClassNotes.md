@@ -158,7 +158,7 @@ for ip in $(cat webservers80.txt);do dirb http://$ip /usr/share/dirb/wordlists/v
 
 
 # ----- NIKTO ----- #
-nikto -host 10.10.10.47 -port 80 -Display -o nikto10_10_10_47.html -Format htm
+nikto -host 10.10.10.47 -port 80 -o nikto10_10_10_47.html -Format htm
 
 # ----- PHP LFI/RFI ----- #
 https://hakin9.org/web-application-penetration-testing-local-file-inclusion-lfi-testing/
