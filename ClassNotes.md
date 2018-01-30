@@ -569,6 +569,13 @@ tcpdump -nn tcp and port 80 and host 10.10.10.10
 ### dirb summary of findings
 egrep -ir 'found' */dirb*
 
+# ----- ProxyChains ----- #
+
+### configure browser sock4 proxy 127.0.0.1:1234 on host
+ssh -D 127.0.0.1:1234 root@ipaddress
+
+127.0.0.1:1234 > ssh basion > vpn to lab
+
 
 # ----- lair Frameworkd Dockers ----- #
 
