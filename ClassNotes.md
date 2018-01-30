@@ -81,7 +81,7 @@ find . -type f -exec md5sum {} \;
 # ----- PORT SCANNING ----- #
 
 ### Basic Scan
-nmap -sS -sV -sC -n -oA --open --reason nmap10.10.10.47 10.10.10.47
+nmap -sS -sV -sC -n --open --reason -oA nmap10.10.10.47 10.10.10.47
 
 SYN SCANNING (half scan) 
 
