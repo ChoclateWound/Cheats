@@ -87,6 +87,7 @@ SYN SCANNING (half scan)
 
 ### NMAP SCRIPTS
 /usr/share/nmap/scripts
+cat /opt/nmap-6.4.7/share/nmap/scripts/script.db
 
 ### PING SWEEP
 nmap -sn 192.168.1.1/24
