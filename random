@@ -1,0 +1,25 @@
+# get list of all accounts:
+cat /etc/passwd
+
+# see who is currently logged in:
+finger
+
+#Another way to see same thing:
+who
+
+#see what they are doing
+w
+
+#Remotely, across the network
+finger @target
+
+#If NIS is in use
+ypcat passwd
+ypcat group
+
+#If ldap is in use
+ldap search
+
+#Windows:
+#Pulling user list from authenticated smb sessions
+automating enumeration via user2sid and sid2user
