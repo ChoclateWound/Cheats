@@ -577,6 +577,9 @@ ssh -D 127.0.0.1:1234 root@ipaddress
 
 127.0.0.1:1234 > ssh basion > vpn to lab
 
+# ----- Send Terminal Traffic via Burp ----- #
+burp > proxy > options > Add "Bind to Port" 8081 and Request handling redirect to host and port
+Now send traffic to localhost:8081 and it will go via burp
 
 # ----- lair Frameworkd Dockers ----- #
 
