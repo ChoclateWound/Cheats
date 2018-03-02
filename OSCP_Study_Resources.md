@@ -55,6 +55,7 @@ https://www.keiththome.com/oscp-course-review/
 ### Common Log Paths
 http://www.itninja.com/blog/view/mysql-and-apache-profile-log-path-locations
 
+https://www.explainshell.com/
 
 
 # ----- Video Resources ----- #
