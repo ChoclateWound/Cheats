@@ -57,6 +57,12 @@ http://www.itninja.com/blog/view/mysql-and-apache-profile-log-path-locations
 
 https://www.explainshell.com/
 
+https://github.com/AnasFullStack/Penetration-Testing-Study-Notes
+https://github.com/kyawthiha7/oscp_notes
+https://github.com/willc/OSCP-stuff
+https://github.com/crsftw/OSCP-cheat-sheet
+https://github.com/generaldespair/OSCP
+https://github.com/ibr2/OSCP-Prep
 
 # ----- Video Resources ----- #
 ### Level Up! Practical Windows Privilege Escalation - Andrew Smith
