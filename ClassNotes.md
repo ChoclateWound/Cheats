@@ -109,6 +109,9 @@ nmap -sn 192.168.1.1/24
 
 nmap -g88 -sS -Pn -n -p 445 --open --reason 10.10.2.0/24 -oA results
 
+### Extract open ports from nmap file
+grep -oP ' [\d]{1,5}/' filename.gnmap | sed 's/[ /n]//g' |tr '\n' ','
+
 # ----- SMB (PORT 139, 445) ----- #
 
 ### Identify smb or netbios services
