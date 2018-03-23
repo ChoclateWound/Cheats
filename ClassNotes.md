@@ -85,17 +85,18 @@ nmap -sS -sV -sC -n --open --reason -oA nmap10.10.10.47 10.10.10.47
 
 SYN SCANNING (half scan) 
 
-### NMAP SCRIPTS
+### NMAP SCRIPTS LOCATION
 /usr/share/nmap/scripts
+#### To see categories of each script
 cat /opt/nmap-6.4.7/share/nmap/scripts/script.db
 
 ### PING SWEEP
 nmap -sn 192.168.1.1/24
 
-### NMAP GOOD ARGUMENTS
--oG = Grepable output
+### NMAP GOOD PARAMETERS
 
---reason: Display the reason a port is in a particular state
+--script-trace = shows what script is doing
+--reason = Display the reason a port is in a particular state
 
 --top--ports (nmap -sT --top-ports 20 IPAddress -oG filename.txt)
 
