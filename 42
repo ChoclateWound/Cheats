@@ -4,3 +4,5 @@ printf "Get / HTTP/1.0\r\n\r\n" | nc -v scanme.nmap.org 80
 # Download site and check for user, pass, comments
 wget -r http://domain.com /tmp
 
+# Script to check methods on webserver
+for method in GET POST PUT TRACE CONNECT OPTIONS; do printf "$method / HTTP/1.1\r\nHOST: www.sec542.org\r\n\r\n" | nc www.sec542.org 80; done
