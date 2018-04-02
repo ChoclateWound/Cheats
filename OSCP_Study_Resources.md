@@ -76,4 +76,4 @@ https://www.youtube.com/watch?v=PC_iMqiuIRQ
 ### Its Too Funky In Here04 Linux privilege escalation for fun profit and all around mischief Jake Willi
 https://www.youtube.com/watch?v=dk2wsyFiosg
 
-
+https://medium.com/@hakluke/haklukes-ultimate-oscp-guide-part-3-practical-hacking-tips-and-tricks-c38486f5fc97
