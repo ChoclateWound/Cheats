@@ -69,6 +69,8 @@ https://github.com/generaldespair/OSCP
 
 https://github.com/ibr2/OSCP-Prep
 
+https://xapax.gitbooks.io/security/content/
+
 # ----- Video Resources ----- #
 ### Level Up! Practical Windows Privilege Escalation - Andrew Smith
 https://www.youtube.com/watch?v=PC_iMqiuIRQ
