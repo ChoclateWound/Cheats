@@ -1,0 +1,7 @@
+# Fix vmware tools on kali linux
+apt-get remove open-vm-tools -y
+apt-get remove open-vm-tools-desktop -y
+# Turn off Kali instance.
+# Go to vmware settings > General and change OS to debian 8.x
+apt-get install open-vm-tools -y
+apt-get install open-vm-tools-desktop -y
